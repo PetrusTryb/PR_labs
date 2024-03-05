@@ -6,6 +6,7 @@
             "command": "C:\\MinGW\\bin\\gcc.exe",
             "args": [
                 "-fdiagnostics-color=always",
+                "-Wall",
                 "-g",
                 "*.c",
                 "-o",

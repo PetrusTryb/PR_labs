@@ -60,9 +60,16 @@ int main()
     map_print(map);
     map_insert(map, s3);
     map_print(map);
-    print(map_pop(map, f_hash(s2)));
+    print(map_pop(map, f_hash(s1)));
     printf("\n");
     map_print(map);
+    map_insert(map, s1);
+    map_insert(map, s2);
+    map_insert(map, s3);
+    map_print(map);
     map_destroy(map);
+    free(s1);
+    free(s2);
+    free(s3);
     return 0;
 }
