@@ -37,9 +37,9 @@ int main()
 {
     hash_map* map = map_init(f_hash, compare, print);
     pg_student* s1, * s2, * s3;
-    s1 = (pg_student*)malloc(sizeof(pg_student));
-    s2 = (pg_student*)malloc(sizeof(pg_student));
-    s3 = (pg_student*)malloc(sizeof(pg_student));
+    s1 = (pg_student*)calloc(1,sizeof(pg_student));
+    s2 = (pg_student*)calloc(1,sizeof(pg_student));
+    s3 = (pg_student*)calloc(1,sizeof(pg_student));
     if(map == NULL || s1 == NULL || s2 == NULL || s3 == NULL)
         return 1;
     strcpy(s1->name, "Trybisz");

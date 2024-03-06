@@ -4,7 +4,7 @@
 
 hash_map *map_init(hash_t (*hash_function)(void *), int (*compare_function)(hash_t, hash_t), void (*print_function)(void *))
 {
-    hash_map *map = (hash_map *)malloc(sizeof(hash_map));
+    hash_map *map = (hash_map *)calloc(1,sizeof(hash_map));
     if(map == NULL)
         return NULL;
     map->keys = NULL;
@@ -16,7 +16,7 @@ hash_map *map_init(hash_t (*hash_function)(void *), int (*compare_function)(hash
 
 void map_insert(hash_map *map, void *data)
 {
-    map_value *value = (map_value *)malloc(sizeof(map_value));
+    map_value *value = (map_value *)calloc(1,sizeof(map_value));
     if(value == NULL)
         return;
     value->data = data;
@@ -39,7 +39,7 @@ void map_insert(hash_map *map, void *data)
         }
         if (map->compare_function(key->hash, hash) > 0)
         {
-            map_key *new_key = (map_key *)malloc(sizeof(map_key));
+            map_key *new_key = (map_key *)calloc(1,sizeof(map_key));
             new_key->hash = hash;
             new_key->values = value;
             new_key->next = key;
@@ -57,7 +57,7 @@ void map_insert(hash_map *map, void *data)
         }
         if (key->next == NULL)
         {
-            map_key *new_key = (map_key *)malloc(sizeof(map_key));
+            map_key *new_key = (map_key *)calloc(1,sizeof(map_key));
             new_key->hash = hash;
             new_key->values = value;
             new_key->next = NULL;
@@ -67,7 +67,7 @@ void map_insert(hash_map *map, void *data)
         }
         key = key->next;
     }
-    key = (map_key *)malloc(sizeof(map_key));
+    key = (map_key *)calloc(1,sizeof(map_key));
     key->hash = hash;
     key->values = value;
     key->next = NULL;
