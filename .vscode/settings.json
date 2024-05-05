@@ -2,7 +2,8 @@
 	"files.associations": {
 		"priority_queue_list.h": "c",
 		"stdio.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"unistd.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }
