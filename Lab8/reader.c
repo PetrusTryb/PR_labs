@@ -5,13 +5,16 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <string.h>
+#include <errno.h>
 #include "config.h"
 
 int main(){
 	int state = mkfifo(FIFO_PATH, 0666);
 	if (state == -1){
-		perror("Cannot create FIFO!");
-		return 1;
+		if(errno != EEXIST){
+			perror("Cannot create FIFO!");
+			return 1;
+		}
 	}
 	int fd = open(FIFO_PATH, O_RDONLY);
 	if (fd == -1){
@@ -21,8 +24,12 @@ int main(){
 	char buf[BUFFER_SIZE];
 	while(1){
 		read(fd, buf, BUFFER_SIZE);
+		if(buf[0] == '!'){
+			break;
+		}
 		printf("Received: %s\n", buf);
 	}
 	close(fd);
+	unlink(FIFO_PATH);
 	return 0;
 }

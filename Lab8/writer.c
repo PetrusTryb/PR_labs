@@ -20,12 +20,9 @@ int main(){
 		return 2;
 	}
 	if (pid > 0){
-		char buf[BUFFER_SIZE];
-		while(1){
-			fgets(buf, BUFFER_SIZE, stdin);
-			write(fd1[WRITE], buf, BUFFER_SIZE);
-			printf("ReadKeyboard--fd1-->SwapCase: %s\n", buf);
-		}
+		char buf;
+		while((buf = getchar()) != '!' && buf != EOF)
+			write(fd1[WRITE], &buf, 1);
 	}
 	else{
 		int pid2 = fork();
@@ -68,4 +65,11 @@ int main(){
 			}
 		}
 	}
+	write(fd1[WRITE], "\n", 1);
+	write(fd1[WRITE], "!", 1);
+	close(fd1[WRITE]);
+	close(fd1[READ]);
+	close(fd2[WRITE]);
+	close(fd2[READ]);
+	return 0;
 }
